@@ -7,20 +7,17 @@
 - scikit-learn
 
 ### 数据集预处理
-Dureader2.0是一个阅读理解数据集, 问题被分为[`Description`, `Entity`, `Yes/No`], 将其中的`Yes/No`问题拿出来, 单独作为分类数据集训练,
-
-数据集可以从这里获取[https://ai.baidu.com/broad/subordinate?dataset=dureader](https://ai.baidu.com/broad/subordinate?dataset=dureader)
-
-我写了个转换文件`json2tsv.py`, 将原始数据集转为run_glue.py需要的格式,
-
-转换后数据集分布如下 共有四类标签:
+- Dureader2.0是一个阅读理解数据集, 问题被分为[`Description`, `Entity`, `Yes/No`], 将其中的`Yes/No`问题拿出来, 单独作为分类数据集训练,
+- 数据集可以从这里获取[https://ai.baidu.com/broad/subordinate?dataset=dureader](https://ai.baidu.com/broad/subordinate?dataset=dureader)
+- 我写了个转换文件`json2tsv.py`(./GLUE_DIR/Dureader/json2tsv.py), 将原始数据集转为run_glue.py需要的格式,
+- 转换后数据集分布如下 共有四类标签: label2idx = {"Yes":'0', "No":'1', "Depends":'2', "No_Opinion":'3'}
+- 数据集标签分布情况如下
 ```
 label = ["Yes", "No", "Depends", "No_Opinion"]
 train = [8486,  5222,  3149,      203]  = 17060
 dev   = [242,   208,   0,         0]    = 450
 ```
 
-标签有四类: label2idx = {"Yes":'0', "No":'1', "Depends":'2', "No_Opinion":'3'}
 
 ### 步骤
 - 1.把整个[pytorch-transformer](https://github.com/huggingface/pytorch-transformers)下载下来, 需要修改的文件只有两个, utils_glue.py 和 run_glue.py
@@ -52,11 +49,9 @@ python ./run_glue.py \
 ```
 
 ### 结果
-global_step = 1068
-
-average loss = 0.783466279422969
-
-acc = 0.6822222222222222
+- global_step = 1068
+- average loss = 0.783466279422969
+- acc = 0.6822222222222222
 
 ### 注意事项
 - 中英文的区别只是pretrain model的vocab.txt的区别
